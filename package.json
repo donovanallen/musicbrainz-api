@@ -27,7 +27,6 @@
   "engines": {
     "node": "*"
   },
-  "type": "module",
   "repository": {
     "type": "git",
     "url": "https://github.com/Borewit/musicbrainz-api.git"
