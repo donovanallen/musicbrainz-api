@@ -15,8 +15,9 @@ import { DigestAuth } from './digest-auth';
 import { RateLimiter } from './rate-limiter';
 import * as mb from './musicbrainz.types';
 
-import ky, {Options, ResponsePromise} from 'ky-universal';
+import * as ky from 'ky-universal';
 import * as tough from 'tough-cookie';
+import {ResponsePromise} from "ky";
 
 export * from './musicbrainz.types';
 
@@ -202,7 +203,7 @@ export class MusicBrainzApi {
   };
 
   private rateLimiter: RateLimiter;
-  private options: Options;
+  private options: any;
   private session: ISessionInformation;
 
   public static fetchCsrf(html: string) {
@@ -250,7 +251,7 @@ export class MusicBrainzApi {
 
     query.fmt = 'json';
 
-    let response: Awaited<ResponsePromise>;
+    let response;
     await this.rateLimiter.limit();
     do {
       response = await ky.get('ws/2' + relUrl, {
